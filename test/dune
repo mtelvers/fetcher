@@ -1,0 +1,4 @@
+(test
+ (name test_fetcher)
+ (package fetcher)
+ (libraries fetcher alcotest eio eio_main cohttp-eio http))

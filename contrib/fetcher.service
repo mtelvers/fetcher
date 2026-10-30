@@ -1,0 +1,26 @@
+[Unit]
+Description=fetcher caching HTTP fetcher
+Documentation=https://github.com/mtelvers/fetcher
+After=network-online.target
+Wants=network-online.target
+# On a day10 worker, start before the worker so its first download finds the cache.
+Before=day10-worker.service
+
+[Service]
+Type=simple
+User=fetcher
+Group=fetcher
+# Containers must be able to reach this address; the docker bridge is typical.
+ExecStart=/usr/local/bin/fetcher serve --root /var/cache/fetcher --listen 172.17.0.1:8080
+Restart=on-failure
+RestartSec=2s
+LimitNOFILE=65536
+CacheDirectory=fetcher
+CacheDirectoryMode=0755
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/cache/fetcher
+
+[Install]
+WantedBy=multi-user.target

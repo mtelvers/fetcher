@@ -1,0 +1,3 @@
+(library
+ (name fetcher)
+ (libraries eio eio.unix cohttp-eio http uri logs fmt cstruct optint unix))

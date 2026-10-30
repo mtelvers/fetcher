@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (public_name fetcher)
+ (package fetcher)
+ (libraries fetcher eio_main cmdliner logs logs.fmt fmt))
